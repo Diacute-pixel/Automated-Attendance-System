@@ -77,7 +77,12 @@ function loadClassData(){
 if(!S.sections.length&&!S.students.length)loadClassData();
 const fullName=s=>s.last+', '+s.first+(s.middle?' '+s.middle:'');
 const secName=id=>{const c=S.sections.find(x=>x.id===id);return c?'Grade '+c.grade+' - '+c.name:'-'};
-const isLate=t=>t.slice(0,5)>S.school.late;
+const timeSeconds=t=>{
+ const p=String(t||'').trim().split(':').map(Number);
+ if(p.length<2||p.some(n=>!Number.isFinite(n)))return 0;
+ return p[0]*3600+(p[1]*60)+(p[2]||0);
+};
+const isLate=t=>timeSeconds(t)>timeSeconds(S.school.late||'06:10');
 let tab='scan',curMonth=today().slice(0,7),logDate=today();
 
 /* tabs */
