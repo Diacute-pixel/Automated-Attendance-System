@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SF2 Web-Based System</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="noprint"><h1>San Bartolome Senior Highschool and School Form 2</h1><nav id="tabs"></nav></header>
+<main>
+<section id="p-scan" class="panel">
+ <div class="grid2">
+  <div class="card"><h2>Scan QR code</h2>
+   <div id="reader"><div class="camera-placeholder">Camera preview will appear here</div></div>
+   <div class="row"><button id="camBtn" class="pri">Start camera</button><button id="flipCam" type="button" hidden>Switch camera</button></div>
+   <label>No camera? Type or scan the LRN here
+    <div class="row" style="margin:0"><input id="manual" placeholder="LRN" inputmode="numeric"><button id="manBtn">Record</button></div></label>
+  </div>
+  <div class="card"><h2>Last scanned</h2><div id="result" class="result">Waiting for a scan.</div></div>
+ </div>
+ <div class="card"><h2>Arrivals today<span id="todayCount"></span></h2><div class="scroll"><table id="todayTbl" class="plain"></table></div></div>
+</section>
+<section id="p-setup" class="panel" hidden>
+ <div class="card"><h2>School</h2><div class="form">
+  <label>School ID<input id="sID"></label><label>School name<input id="sName"></label><label>School year<input id="sYear"></label>
+  <label>School head<input id="sHead"></label><label>Late if scanned after<input id="sLate" type="time"></label></div></div>
+ <div class="card"><h2>Sections</h2><div class="form">
+  <label>Grade level<input id="cGrade"></label><label>Section<input id="cName"></label><label>Adviser<input id="cAdv"></label>
+  <button id="cAdd" class="pri">Add section</button></div><div id="cList"></div></div>
+ <div class="card"><h2>Add student</h2><div class="form">
+  <label>LRN<input id="stLrn" inputmode="numeric"></label><label>Last name<input id="stLast"></label><label>First name<input id="stFirst"></label>
+  <label>Middle name<input id="stMid"></label>
+  <label>Sex<select id="stSex"><option value="M">Male</option><option value="F">Female</option></select></label>
+  <label>Section<select id="stSec"></select></label><button id="stAdd" class="pri">Add student</button></div>
+  <p class="hint">The QR code of each student holds the LRN. Print the cards below and give one to each student.</p></div>
+ <div class="card"><h2>Students <span id="stCount"></span></h2>
+  <div class="row"><select id="qrSec"></select><button id="qrPrint">Print QR cards</button><button id="sample">Load class data</button></div>
+  <div class="scroll"><table id="stTbl" class="plain"></table></div></div>
+</section>
+<section id="p-sec" class="panel" hidden></section>
+</main>
+<div id="qrSheet"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="dia.js"></script>
+</body>
+</html>

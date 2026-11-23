@@ -1,0 +1,621 @@
+/* Theme variables */
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  --bg: #f3f5f9;
+  --card: #fff;
+  --ink: #17202e;
+  --mute: #5b6679;
+  --line: #cfd6e2;
+  --pri: #1f4aa8;
+  --priink: #fff;
+  --ok: #16794a;
+  --warn: #b45309;
+  --bad: #b42318;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151f;
+    --card: #18202d;
+    --ink: #e8edf5;
+    --mute: #9aa6ba;
+    --line: #2c3748;
+    --pri: #6c93f0;
+    --priink: #0b1020;
+    --ok: #4cc38a;
+    --warn: #f0b04a;
+    --bad: #ff8a80;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #10151f;
+  --card: #18202d;
+  --ink: #e8edf5;
+  --mute: #9aa6ba;
+  --line: #2c3748;
+  --pri: #6c93f0;
+  --priink: #0b1020;
+  --ok: #4cc38a;
+  --warn: #f0b04a;
+  --bad: #ff8a80;
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0);
+  background: var(--card);
+  z-index: 10;
+}
+
+/* Header and navigation */
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 16px 0;
+  position: sticky;
+  top: env(safe-area-inset-top, 0);
+  z-index: 5;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+nav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+nav button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--mute);
+  padding: 9px 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+nav button.on {
+  color: var(--pri);
+  border-color: var(--pri);
+}
+
+/* Main layout */
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 760px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Forms and controls */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--mute);
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  color: var(--ink);
+}
+
+input,
+select {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  min-width: 0;
+}
+
+button {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  cursor: pointer;
+}
+
+button.pri {
+  background: var(--pri);
+  color: var(--priink);
+  border-color: var(--pri);
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pri);
+  outline-offset: 2px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--mute);
+  margin: 10px 0 0;
+}
+
+/* QR scanner and scan results */
+#reader {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.result {
+  padding: 14px;
+  border-radius: 8px;
+  border: 2px solid var(--line);
+  min-height: 150px;
+}
+
+.result.ok {
+  border-color: var(--ok);
+}
+
+.result.warn {
+  border-color: var(--warn);
+}
+
+.result.bad {
+  border-color: var(--bad);
+}
+
+.big {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.time {
+  font-size: 34px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* Tables */
+table.plain {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.plain th,
+table.plain td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.late {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.okc {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+/* Student chips */
+.chip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.chip button {
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+/* School Form 2 sheet */
+.sheet {
+  background: #fff;
+  color: #000;
+  font: 10px/1.2 Arial, Helvetica, sans-serif;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  min-width: 1600px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.sheet table,
+.sheet th,
+.sheet td {
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.sheet span,
+.sheet input,
+.sheet b,
+.sheet p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.sheet h3 {
+  text-align: center;
+  margin: 0;
+  font-size: 15px;
+}
+
+.sheet-heading {
+  position: relative;
+  min-height: 58px;
+  margin-bottom: 8px;
+}
+
+.sheet-title {
+  padding: 8px 68px 0;
+  text-align: center;
+}
+
+.sf2-logo {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.sheet .sub {
+  text-align: center;
+  font-size: 8px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.fld {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 20px;
+  margin-bottom: 8px;
+}
+
+.fld div {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.fld b {
+  white-space: nowrap;
+}
+
+.fld span {
+  flex: 1;
+  border: 1px solid #000;
+  min-height: 18px;
+  padding: 1px 4px;
+  font-size: 11px;
+}
+
+/* School Form 2 attendance table */
+.sf2 {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.sf2 th,
+.sf2 td {
+  border: 1px solid #000;
+  padding: 3px 4px;
+  min-height: 24px;
+  height: auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sf2 th {
+  font-size: 8px;
+  height: auto;
+  line-height: 1.3;
+}
+
+.sf2 col.n {
+  width: 18%;
+}
+
+.sf2 col.d {
+  width: 2.4%;
+}
+
+.sf2 col.t {
+  width: 3.2%;
+}
+
+.sf2 col.r {
+  width: 20%;
+}
+
+.sf2 .nm {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  min-height: 24px;
+}
+
+.sf2 .rm {
+  text-align: left;
+  font-size: 8px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  min-height: 24px;
+}
+
+.sf2 th[data-day] {
+  cursor: pointer;
+}
+
+.sf2 th.off,
+.sf2 td.off {
+  background: #d6d6d6;
+}
+
+.dx {
+  font-size: 9px;
+  font-weight: 700;
+  background: linear-gradient(
+    to bottom right,
+    transparent calc(50% - .6px),
+    #000 calc(50% - .6px),
+    #000 calc(50% + .6px),
+    transparent calc(50% + .6px)
+  );
+}
+
+.dx.late {
+  background:
+    linear-gradient(
+      to bottom right,
+      transparent calc(50% - .6px),
+      #000 calc(50% - .6px),
+      #000 calc(50% + .6px),
+      transparent calc(50% + .6px)
+    ),
+    linear-gradient(to bottom right, #7d7d7d 50%, transparent 50%);
+}
+
+.dx.off {
+  background: #d6d6d6;
+}
+
+.tot td {
+  font-weight: 700;
+  background: #f0f0f0;
+}
+
+/* Page 2 summary */
+.pg2 {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 18px;
+  font-size: 9px;
+}
+
+.pg2 p {
+  margin: 0 0 4px;
+}
+
+.sum {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0 12px;
+}
+
+.sum th,
+.sum td {
+  border: 1px solid #000;
+  padding: 3px 4px;
+  text-align: center;
+  font-size: 9px;
+}
+
+.sum td.l {
+  text-align: left;
+}
+
+.sum input {
+  width: 60px;
+  border: 0;
+  background: none;
+  text-align: center;
+  color: #000;
+  font: inherit;
+}
+
+.sig {
+  margin-top: 14px;
+  font-size: 10px;
+}
+
+.sig div {
+  margin-top: 18px;
+  border-top: 1px solid #000;
+  padding-top: 2px;
+  text-align: center;
+  font-size: 8px;
+}
+
+.sig b {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  min-height: 12px;
+}
+
+.lg {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+
+.lg th,
+.lg td {
+  border: 1px solid #000;
+  padding: 2px 6px;
+  text-align: left;
+  font-size: 11px;
+}
+
+/* QR print cards */
+#qrSheet {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px;
+}
+
+.qcard {
+  border: 1px dashed #000;
+  padding: 8px;
+  text-align: center;
+  font: 12px Arial, sans-serif;
+  color: #000;
+  background: #fff;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Print layout */
+@media print {
+  @page {
+    size: landscape;
+    margin: 8mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  header,
+  .noprint,
+  #p-scan,
+  #p-setup,
+  body::before {
+    display: none !important;
+  }
+
+  main {
+    padding: 0;
+    max-width: none;
+  }
+
+  .sheet {
+    border: 0;
+    padding: 0;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .s2,
+  .logsheet {
+    break-before: page;
+  }
+
+  .sf2 thead {
+    display: table-header-group;
+  }
+
+  .sf2 tr {
+    break-inside: avoid;
+  }
+
+  .sum input {
+    width: 100%;
+  }
+
+  body.pm-qr #p-sec {
+    display: none !important;
+  }
+
+  body.pm-qr #qrSheet {
+    display: grid !important;
+  }
+}
